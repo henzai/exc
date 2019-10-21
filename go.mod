@@ -1,4 +1,4 @@
-module github.com/henzai/exc
+module github.com/henzai/exc/v0
 
 go 1.13
 
