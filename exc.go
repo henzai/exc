@@ -27,16 +27,9 @@ func (e *Error) LastKind() Kind {
 	return ""
 }
 
-func (e *Error) Error() string {
-	if e.kind != "" {
-		return fmt.Sprintf("kind: %v msg: %v", e.kind, e.msg)
-	}
-	return e.msg
-}
+func (e *Error) Error() string { return e.msg + ": " + e.Unwrap().Error() }
 
-func (e *Error) Unwrap() error {
-	return e.err
-}
+func (e *Error) Unwrap() error { return e.err }
 
 func (e *Error) Format(s fmt.State, v rune) {
 	xerrors.FormatError(e, s, v)
