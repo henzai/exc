@@ -66,6 +66,8 @@ func Wrap(err error, opts ...Option) error {
 	return e
 }
 
+// Is returns true if err contained a specific Kind.
+// Deprecated: use IsKind()
 func Is(kind Kind, err error) bool {
 	e, ok := err.(*Error)
 	if !ok {
@@ -76,6 +78,21 @@ func Is(kind Kind, err error) bool {
 	}
 	if e.err != nil {
 		return Is(kind, e.err)
+	}
+	return false
+}
+
+// IsKind returns true if err contained a specific Kind.
+func IsKind(err error, kind Kind) bool {
+	e, ok := err.(*Error)
+	if !ok {
+		return false
+	}
+	if e.kind != "" {
+		return e.kind == kind
+	}
+	if e.err != nil {
+		return IsKind(e.err, kind)
 	}
 	return false
 }
