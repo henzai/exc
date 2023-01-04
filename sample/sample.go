@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/henzai/exc/v0"
+	"github.com/henzai/exc"
 )
 
 const (
